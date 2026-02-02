@@ -1,0 +1,29 @@
+package com.istiqamah.rtmp_native
+
+import android.os.Bundle
+import android.os.Handler
+import android.view.SurfaceView
+import android.view.WindowManager
+import androidx.appcompat.app.AppCompatActivity
+
+class CameraDemoActivity : AppCompatActivity() {
+
+    lateinit var surfaceView: SurfaceView
+    lateinit var a: RtmpServer
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+        setContentView(R.layout.activity_camera_demo)
+//      call id surface
+        surfaceView = findViewById(R.id.surfaceView)
+//        activity, surfaceView
+        a = RtmpServer(this, surfaceView)
+//        context
+        a.initSurfaceView(applicationContext)
+//        url rtmp
+        a.startStreaming("rtmp://a.rtmp.youtube.com/live2/fcu9-77yz-ugbq-wgj6-amhz")
+    }
+
+
+}
